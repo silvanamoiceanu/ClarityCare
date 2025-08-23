@@ -1,0 +1,67 @@
+---
+extract_phone_numbers_and_provider_info:
+  description: |-
+    Analyze the explanation of benefits PDF file at {pdf_file_path} and extract all relevant information including:
+    - Customer service phone numbers
+    - Provider contact information
+    - Provider name and organization
+    - Claim details that might be useful for communication
+    Search for terms like "customer service", "phone", "contact", "call", and provider names within the PDF.
+  expected_output: |-
+    A detailed report containing:
+    - Primary customer service phone number (formatted as xxx-xxx-xxxx)
+    - Provider name and organization
+    - Any additional contact information found
+    - Summary of the claim or service being discussed in the document
+  agent: pdf_data_extraction_specialist
+prepare_voice_call_communication:
+  description: |-
+    Using the extracted phone number and provider information, prepare for voice communication by:
+    - Validating the phone number format
+    - Creating appropriate call script for the healthcare provider contact
+    - Preparing context information from the explanation of benefits
+    - Setting up the parameters needed for ElevenLabs voice agent integration
+    Note: This task prepares for the voice call but actual ElevenLabs integration requires external setup.
+  expected_output: |-
+    A communication package containing:
+    - Validated phone number ready for dialing
+    - Professional call script tailored to the provider
+    - Key talking points from the explanation of benefits
+    - Instructions for ElevenLabs voice agent setup (if external integration is available)
+  agent: voice_communication_coordinator
+  context:
+  - extract_phone_numbers_and_provider_info
+locate_and_open_provider_chat_interface:
+  description: |-
+    Find the healthcare provider's website and navigate to their customer service chat interface by:
+    - Searching for the provider's official website using their name
+    - Navigating to customer service or contact sections
+    - Locating and opening the chat interface or live support feature
+    - Preparing the chat window for user interaction
+    This runs in parallel with voice communication preparation.
+  expected_output: |-
+    Successfully opened chat interface with:
+    - Provider website URL accessed
+    - Chat window or customer service portal opened and ready
+    - Screenshot or confirmation of the active chat interface
+    - Any pre-filled information or preparation steps completed
+  agent: provider_website_navigator
+  context:
+  - extract_phone_numbers_and_provider_info
+finalize_communication_setup:
+  description: |-
+    Complete the communication setup by consolidating all prepared resources:
+    - Confirm voice call preparation is ready (with ElevenLabs integration notes)
+    - Verify chat interface is opened and accessible
+    - Provide final summary of available communication channels
+    - Present user with next steps for both voice and chat communications
+  expected_output: |-
+    Final communication summary containing:
+    - Voice call status and ElevenLabs integration requirements
+    - Active chat interface confirmation and access details
+    - Complete contact information extracted from the PDF
+    - User instructions for proceeding with either communication method
+  agent: voice_communication_coordinator
+  context:
+  - prepare_voice_call_communication
+  - locate_and_open_provider_chat_interface
