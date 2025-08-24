@@ -1,4 +1,24 @@
-# Claritycare Crew
+# Clarity Care was created on 8/23/2025 at CrewAI's 1st Hackathon
+
+Clarity Care is a software for simplifying medical documentation. Using crewAI, groq, browserbase, and serper, Clarity Care is agentic and the UI was built using Windsurf. 
+
+You can find the CrewAI Enterprise version here: https://claritycare-86512f9b-a9d7-4aae-ab94-d6beb90-d41e1995.crewai.com 
+
+What Clarity Care can currently do: It can parse through a pdf converted to an image and extract numbers along with information about the health care provider as found on the web and the medical document. 
+
+# Problems and Next Steps 
+
+Problems:
+- Scanned pdf wasn’t able to be used and needed to convert into a png so that it could be read
+
+Next steps: 
+
+- Integrate a voice agent so that people can talk to a customer service provider
+
+- Figure out best ways to parse over a scanned pdf using OCR 
+
+
+# Clarity Care Crew AI Implementation 
 
 Welcome to the Claritycare Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
 
