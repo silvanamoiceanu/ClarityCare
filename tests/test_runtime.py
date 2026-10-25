@@ -1,4 +1,5 @@
 """Runtime checks using real PDF/image libraries and Streamlit's test runner."""
+from pathlib import Path
 import io
 import unittest
 from unittest.mock import patch
@@ -48,12 +49,12 @@ class UploadRuntimeTests(unittest.TestCase):
 
     def test_interface_renders_without_credentials(self):
         with patch.dict("os.environ", {"OPENAI_API_KEY": "", "SERPER_API_KEY": ""}):
-            app = AppTest.from_file("src/claritycare/ui.py").run(timeout=30)
+            app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "src/claritycare/ui.py")).run(timeout=30)
         self.assertEqual(len(app.exception), 0)
         self.assertEqual(app.title[0].value, "Less confusion. More clarity.")
 
     def test_clear_session_discards_document(self):
-        app = AppTest.from_file("src/claritycare/ui.py")
+        app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "src/claritycare/ui.py"))
         app.session_state["text"] = "Private document fixture"
         app.session_state["explanation"] = {"summary": "Private summary"}
         app.run(timeout=30)
