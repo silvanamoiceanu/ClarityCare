@@ -29,7 +29,7 @@ def extract_document(data, filename):
                 raise ValueError("Please upload at most 20 pages at a time.")
             for number, page in enumerate(doc, 1):
                 text = page.get_text().strip()
-                if len(text) < 40:
+                if not text:
                     from PIL import Image
                     pix = page.get_pixmap(matrix=fitz.Matrix(2, 2))
                     text = ocr_image(Image.open(io.BytesIO(pix.tobytes("png"))))
