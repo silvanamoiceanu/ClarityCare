@@ -50,11 +50,18 @@ Install requirements-ui.txt for the interface.
 
 ## Verification
 
+Install the UI dependencies above before running the full suite.
+
 ```bash
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-CI checks compilation and document unit tests without API credentials.
-Manual checks still needed: text PDF, scanned PDF, photo, missing credentials,
-AI explanation with real credentials, phone links, public sources, replacement
-uploads, and clearing the session.
+CI checks compilation and 15 tests without API credentials. Tests cover phone
+extraction, source validation, real text PDFs (including short text), PDF page
+limits, image/PDF OCR routing with a mocked OCR engine, empty scans, Streamlit
+initial rendering, and session clearing.
+
+Manual checks still needed: real Tesseract OCR accuracy, AI explanations with
+real credentials, phone links, public sources, and replacement uploads. The
+runtime suite installs interface libraries but does not install or exercise the
+CrewAI model integration.
